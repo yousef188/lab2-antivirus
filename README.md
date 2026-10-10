@@ -15,7 +15,7 @@ CC373 Operating Systems - Alexandria University
 ### Folder hierarchy
 
 ```
-lab2-antivirus/
+9117-lab2/
 ├── antivirusd.sh
 ├── restore.sh
 ├── antivirus-cron.sh
@@ -42,7 +42,7 @@ sudo apt install make
 1. Go to the project folder and create the folder to monitor:
 
    ```bash
-   cd lab2-antivirus
+   cd 9117-lab2
    mkdir files
    ```
 
@@ -131,10 +131,10 @@ KEYWORDS=("virus" "trojan" "malware" "worm" "ransomware")
    crontab -e
    ```
 
-2. Add this line (change `/home/USER/lab2-antivirus` to your path):
+2. Add this line (change `/home/USER/9117-lab2` to your path):
 
    ```
-   * * * * * sleep 23 && cd /home/USER/lab2-antivirus && ./antivirus-cron.sh files malicious
+   * * * * * sleep 23 && cd /home/USER/9117-lab2 && ./antivirus-cron.sh files malicious
    ```
 
    Cron can't use seconds, so it runs every minute and `sleep 23` makes it start
@@ -152,7 +152,7 @@ KEYWORDS=("virus" "trojan" "malware" "worm" "ransomware")
 ### Every 3rd Friday of the month at 12:31 am
 
 ```
-31 0 15-21 * * [ "$(date +\%u)" = 5 ] && cd /home/USER/lab2-antivirus && ./antivirus-cron.sh files malicious
+31 0 15-21 * * [ "$(date +\%u)" = 5 ] && cd /home/USER/9117-lab2 && ./antivirus-cron.sh files malicious
 ```
 
 The 3rd Friday is always between day 15 and 21, so it runs on days 15-21 at

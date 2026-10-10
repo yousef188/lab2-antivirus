@@ -15,10 +15,13 @@ while true; do
         exit 0
     fi
 
+
     echo "Choose a file:"
     for i in "${!files[@]}"; do
         echo "$((i + 1)): $(basename "${files[$i]}")"
     done
+
+
 
     printf "> "
     read num || exit 0
@@ -27,16 +30,18 @@ while true; do
         continue
     fi
 
+
     file="${files[$((num - 1))]}"
     name=$(basename "$file")
 
+
+    
     echo "For $name:"
     echo "1: Restore this file back into dir (it was a false positive)"
     echo "2: Permanently delete this file from malicious_dir (it was genuinely malicious)"
     echo "3: Go back"
     printf "> "
     read opt || exit 0
-
     case "$opt" in
         1)
             cp "$file" "$DIR/$name"

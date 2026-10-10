@@ -1,13 +1,13 @@
 #!/bin/bash
 # usage: ./antivirus-cron.sh dir malicious_dir
 # same as antivirusd.sh but checks once, cron runs it every minute
-
 DIR="$1"
 MAL_DIR="$2"
 
-# flagged extensions and keywords
+# estension m3molha flag
 EXTENSIONS=(".exe" ".bat" ".vbs" ".scr" ".ps1")
 KEYWORDS=("virus" "trojan" "malware" "worm" "ransomware")
+
 
 mkdir -p "$MAL_DIR"
 
@@ -25,13 +25,11 @@ is_malicious() {
     done
     return 1
 }
-
 scan() {
     for file in "$DIR"/*; do
         [ -f "$file" ] || continue
         name=$(basename "$file")
 
-        # skip files restored before (bonus 2)
         if [ -f whitelist.txt ] && grep -qxF "$name" whitelist.txt; then
             continue
         fi
@@ -46,6 +44,6 @@ scan() {
 ls -l "$DIR" > directory-info.new
 if [ ! -f directory-info.last ] || ! cmp -s directory-info.new directory-info.last; then
     scan
-    # take the listing again after the scan removed files
+    # take the listing again after the scan removed files.....
     ls -l "$DIR" > directory-info.last
 fi

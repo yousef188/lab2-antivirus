@@ -4,11 +4,9 @@
 DIR="$1"
 MAL_DIR="$2"
 INTERVAL="$3"
-
 # flagged extensions and keywords
 EXTENSIONS=(".exe" ".bat" ".vbs" ".scr" ".ps1")
 KEYWORDS=("virus" "trojan" "malware" "worm" "ransomware")
-
 mkdir -p "$MAL_DIR"
 
 is_malicious() {
@@ -25,7 +23,6 @@ is_malicious() {
     done
     return 1
 }
-
 scan() {
     for file in "$DIR"/*; do
         [ -f "$file" ] || continue
@@ -42,13 +39,11 @@ scan() {
         fi
     done
 }
-
 # first run: no directory-info.last yet, so scan now
 if [ ! -f directory-info.last ]; then
     scan
     ls -l "$DIR" > directory-info.last
 fi
-
 while true; do
     sleep "$INTERVAL"
     ls -l "$DIR" > directory-info.new
