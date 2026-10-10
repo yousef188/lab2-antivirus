@@ -15,12 +15,13 @@ while true; do
         exit 0
     fi
 
-    echo "Quarantined files:"
+    echo "Choose a file:"
     for i in "${!files[@]}"; do
-        echo "$((i + 1))) $(basename "${files[$i]}")"
+        echo "$((i + 1)): $(basename "${files[$i]}")"
     done
 
-    read -p "Choose a file number: " num || exit 0
+    printf "> "
+    read num || exit 0
     if ! [[ "$num" =~ ^[1-9][0-9]*$ ]] || [ "$num" -gt ${#files[@]} ]; then
         echo "Invalid number."
         continue
@@ -29,10 +30,12 @@ while true; do
     file="${files[$((num - 1))]}"
     name=$(basename "$file")
 
-    echo "1) Restore (false positive)"
-    echo "2) Delete permanently"
-    echo "3) Leave it"
-    read -p "Choose an option: " opt || exit 0
+    echo "For $name:"
+    echo "1: Restore this file back into dir (it was a false positive)"
+    echo "2: Permanently delete this file from malicious_dir (it was genuinely malicious)"
+    echo "3: Go back"
+    printf "> "
+    read opt || exit 0
 
     case "$opt" in
         1)

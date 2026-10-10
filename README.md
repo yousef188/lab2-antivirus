@@ -81,10 +81,21 @@ sudo apt install make
    make restore
    ```
 
-3. Type the number of a file, then:
-   - `1` restore it to `files/`
-   - `2` delete it permanently
-   - `3` leave it and go back to the list
+3. It shows the quarantined files as a numbered list:
+
+   ```
+   Choose a file:
+   1: demo.exe
+   2: report.txt
+   > 1
+   For demo.exe:
+   1: Restore this file back into dir (it was a false positive)
+   2: Permanently delete this file from malicious_dir (it was genuinely malicious)
+   3: Go back
+   > 1
+   Restored demo.exe to files.
+   ```
+
 4. It stops when there are no files left (`No malicious files to review.`), or
    press Ctrl+C.
 
